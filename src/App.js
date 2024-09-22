@@ -5,11 +5,11 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [score, setScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const food = useRef({});
   const intervalID = useRef(0);
   const snakeLength = useRef(1);
-  const gameStarted = useRef(false);
   const direction = useRef("ArrowRight");
   const head = useRef({headI:0, headJ:0});
   const snakeCoordinates = useRef([{i:0, j:0}])
@@ -28,15 +28,12 @@ function App() {
   const startGame = () => {
     setScore(0);
     getFood();
+    snakeLength.current = 1;
     direction.current = 'ArrowRight';
     head.current = {headI:0, headJ:0};
-    if(score >= 2) {
-      speed = 100;
-    } else if(score >= 10) {
-      speed = 50;
-    }
+    snakeCoordinates.current = [{i:0, j:0}];
     intervalID.current = setInterval(moveSnake, speed);
-    gameStarted.current = true;
+    setGameStarted(true);
   }
 
   const moveSnake = () => {
@@ -46,8 +43,13 @@ function App() {
       d[i] =  {...d[i-1]};
     }
     d[0] = {i: head.current.headI, j: head.current.headJ};
-    
     snakeCoordinates.current = [...d];
+
+    if(score >= 2) {
+      speed = 100;
+    } else if(score >= 10) {
+      speed = 50;
+    }
     switch(direction.current) {
       case "ArrowDown":
         head.current.headI = head.current.headI + 1;
@@ -75,7 +77,7 @@ function App() {
     if(head.current.headI  === -2 || head.current.headI  === 32 || 
       head.current.headJ === -2 || head.current.headJ === 39 
     ) {
-      gameStarted.current = false;
+      setGameStarted(false);
       setIsGameOver(true);
       clearInterval(intervalID.current);
       alert("Game Over!!");
@@ -127,11 +129,18 @@ function App() {
 
   return (
     <div className="App">
-      <button className='button' onClick={startGame} disabled={gameStarted.current}>Start Game</button>
-      <div className='board'>
-        {boardLayout()}
-      </div>
-      <div className='score'>Score : {score}</div>
+      {!gameStarted ? 
+        <>
+          <img src='https://snake-game.io/data/image/snakelogo.png' alt='sanke'/>
+          <button className='button' onClick={startGame}>Start Game</button> 
+        </>:
+        <>
+          <div className='score'>Score : {score}</div>
+          <div className='board'>
+            {boardLayout()}
+          </div>
+        </>
+     }
     </div>
   );
 }

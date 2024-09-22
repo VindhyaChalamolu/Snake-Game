@@ -1,10 +1,11 @@
 .App {
+  margin: auto;
+  width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px 50px 0px 50px;
-  row-gap: 5px;
-  flex-direction: column;
+  width: fit-content
 }
 
 .board {
@@ -16,6 +17,7 @@
   display: grid;
   grid-template-rows: repeat(30, 21px);
   grid-template-columns: repeat(38, 21px);
+  top: 60px;
 }
 
 .food {
@@ -51,16 +53,62 @@
 .board-box {
   border: 1px solid #a4f4f41d;
 }
-
+img {
+  position: absolute;
+  top: 100px;
+  border-radius: 10px;
+  width: 700px;
+}
 button {
-  background-color: black;
-  color: white;
+  color: rgb(54, 133, 2);
   border-radius: 5px;
-  border: none;
-  padding: 5px;
+  border: solid 4px orange;
   cursor: pointer;
+  width: 150px;
+  padding: 10px;
+  margin-top: 100px;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  animation: glowing 1s  ease-in-out  infinite alternate;
+
 }
 
 .score {
   font-size: 25px;
+  align-self: start;
+  color: orange;
+}
+
+.modal {
+  height: 200px;
+  width: 350px;
+  background-color: rgb(236, 241, 244);
+  position: absolute;
+  z-index: 2;
+  text-align: center;
+  border-radius: 5px;
+  /* padding-top: 50px; */
+}
+
+.modal button {
+  width: 70px;
+  border: 3px;
+  padding: 6px;
+  box-shadow: #070F2B;
+}
+
+@keyframes glowing {
+  0% {
+    background-color: rgba(235, 199, 17, 0.922);
+    box-shadow: 0 0 3px rgba(235, 199, 17, 0.922);
+  }
+  50% {
+    background-color: rgba(243, 204, 9, 0.952);
+    box-shadow: 0 0 10px rgba(243, 204, 9, 0.952);
+  }
+  100% {
+    background-color: rgb(255, 213, 0);
+    box-shadow: 0 0 3px rgb(255, 213, 0);
+  }
 }
