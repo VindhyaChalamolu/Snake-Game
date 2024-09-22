@@ -103,10 +103,6 @@ button {
     background-color: rgba(235, 199, 17, 0.922);
     box-shadow: 0 0 3px rgba(235, 199, 17, 0.922);
   }
-  50% {
-    background-color: rgba(243, 204, 9, 0.952);
-    box-shadow: 0 0 10px rgba(243, 204, 9, 0.952);
-  }
   100% {
     background-color: rgb(255, 213, 0);
     box-shadow: 0 0 3px rgb(255, 213, 0);
