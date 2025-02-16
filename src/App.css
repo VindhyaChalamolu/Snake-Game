@@ -59,7 +59,7 @@ img {
   border-radius: 10px;
   width: 700px;
 }
-button {
+.button {
   color: rgb(54, 133, 2);
   border-radius: 5px;
   border: solid 4px orange;
@@ -80,22 +80,36 @@ button {
   color: orange;
 }
 
-.modal {
-  height: 200px;
-  width: 350px;
-  background-color: rgb(236, 241, 244);
-  position: absolute;
-  z-index: 2;
-  text-align: center;
-  border-radius: 5px;
-  /* padding-top: 50px; */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white; 
 }
 
-.modal button {
-  width: 70px;
-  border: 3px;
-  padding: 6px;
-  box-shadow: #070F2B;
+.modal-content {
+  background: #e2dede26;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 300px;
+  border: 0.5px solid #e2dfdf;
+  box-shadow: 0px 0px 0px 0px #e7e3e32e, 0px 0px 10px 0px #e7e3e3f5;
+}
+
+.modal-container button {
+  cursor: pointer;
+  border-radius: 2px;
+  border: 0.6px solid grey;
+  background-color: rgb(214, 213, 211);
+  color: black;
+  height: 30px;
+  width: 50px;
 }
 
 @keyframes glowing {

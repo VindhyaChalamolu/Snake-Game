@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
+import Modal from './components/Modal';
 
 function App() {
   const [temp, setTemp] = useState(0);
   const [score, setScore] = useState(0);
-  const [isGameOver, setIsGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
   const food = useRef({});
@@ -34,6 +35,7 @@ function App() {
     snakeCoordinates.current = [{i:0, j:0}];
     intervalID.current = setInterval(moveSnake, speed);
     setGameStarted(true);
+    setGameOver(false);
   }
 
   const moveSnake = () => {
@@ -77,11 +79,13 @@ function App() {
     if(head.current.headI  === -2 || head.current.headI  === 32 || 
       head.current.headJ === -2 || head.current.headJ === 39 
     ) {
-      setGameStarted(false);
-      setIsGameOver(true);
       clearInterval(intervalID.current);
-      alert("Game Over!!");
+      setGameOver(true);
     }
+  }
+
+  const gameStartModal = () => {
+    setGameStarted(false);
   }
 
   const getFood = () => {
@@ -131,15 +135,18 @@ function App() {
     <div className="App">
       {!gameStarted ? 
         <>
-          <img src='https://snake-game.io/data/image/snakelogo.png' alt='sanke'/>
+          <img src='https://snake-game.io/data/image/snakelogo.png' alt='sanke' />
           <button className='button' onClick={startGame}>Start Game</button> 
-        </>:
-        <>
-          <div className='score'>Score : {score}</div>
-          <div className='board'>
-            {boardLayout()}
-          </div>
-        </>
+        </> :
+        (gameOver ? 
+          <Modal score={score} startGame={gameStartModal} /> :
+          <>
+            <div className='score'>Score : {score}</div>
+            <div className='board'>
+              {boardLayout()}
+            </div>
+          </>
+        )
      }
     </div>
   );
